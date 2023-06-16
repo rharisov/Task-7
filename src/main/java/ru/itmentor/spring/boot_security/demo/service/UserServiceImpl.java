@@ -9,7 +9,6 @@ import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -30,16 +29,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void addUser(User user) {
         userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(User user) {
         User userToUpdate = new User();
         userToUpdate = getUserById(user.getId());

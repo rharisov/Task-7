@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -38,17 +39,17 @@ public class User implements UserDetails {
 
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    public User(Long id, String name, String lastName, Integer salary, String email, String password, Collection<Role> roles) {
+    public User(Long id, String name, String lastName, Integer salary, String email, String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
