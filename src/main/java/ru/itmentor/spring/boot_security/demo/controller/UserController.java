@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
-import ru.itmentor.spring.boot_security.demo.service.UserDetailsServiceImp;
 import ru.itmentor.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;

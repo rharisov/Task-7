@@ -5,23 +5,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.itmentor.spring.boot_security.demo.model.User;
-import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    public UserDetailsServiceImp(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImp(UserService userService) {
+        this.userService = userService;
     }
+
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByName(username);
+        User user = userService.findByName(username);
         System.out.println(user);
         if (user == null) {
             throw new UsernameNotFoundException(username);
