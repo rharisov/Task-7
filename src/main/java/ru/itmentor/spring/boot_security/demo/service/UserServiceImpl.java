@@ -50,4 +50,8 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setEmail(user.getEmail());
         userRepository.save(userToUpdate);
     }
+
+    public User findByName(String name) {
+        return userRepository.findByName(name);
+    }
 }

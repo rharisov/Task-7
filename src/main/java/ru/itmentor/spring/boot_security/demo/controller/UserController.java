@@ -16,18 +16,15 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService,
-                          UserRepository userRepository) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping()
     public String indexPage(ModelMap model, Principal principal) {
-        model.addAttribute("user", userRepository.findByName(principal.getName()));
+        model.addAttribute("user", userService.findByName(principal.getName()));
         return "user";
     }
 
