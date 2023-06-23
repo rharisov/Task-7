@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itmentor.spring.boot_security.demo.model.User;
+import ru.itmentor.spring.boot_security.demo.model.UserDTO;
 import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
 
 import java.util.List;
@@ -30,8 +31,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(User user) {
-        userRepository.save(user);
+    public void addUser(UserDTO user) {
+        User userNow = new User();
+        userNow.setName(user.getName());
+        userNow.setLastName(user.getLastName());
+        userNow.setEmail(user.getEmail());
+        userNow.setSalary(user.getSalary());
+        userRepository.save(userNow);
     }
 
     @Override
@@ -43,12 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User user) {
-        User userToUpdate = new User();
-        userToUpdate = getUserById(user.getId());
-        userToUpdate.setName(user.getName());
-        userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setEmail(user.getEmail());
-        userRepository.save(userToUpdate);
+        userRepository.save(user);
     }
 
     public User findByName(String name) {

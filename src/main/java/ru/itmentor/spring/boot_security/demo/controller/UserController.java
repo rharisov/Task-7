@@ -1,15 +1,18 @@
 package ru.itmentor.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
@@ -21,9 +24,9 @@ public class UserController {
     }
 
     @GetMapping()
-    public String indexPage(ModelMap model, Principal principal) {
-        model.addAttribute("user", userService.findByName(principal.getName()));
-        return "user";
+    public ResponseEntity<User> indexPage(Principal principal) {
+
+        return ResponseEntity.ok(userService.findByName(principal.getName()));
     }
 
 
